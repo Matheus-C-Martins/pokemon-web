@@ -7,7 +7,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Leafeon (Grass Starter) - Custom sprite with animations
   'leafeon': {
-    url: '/sprites/leafeon.png', // Save first image as leafeon.png
+    url: '/pokemon-web/sprites/leafeon.png', // GitHub Pages base path
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 evolving
@@ -22,7 +22,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Forestorm (Leafeon evolution 1) - Custom sprite with animations
   'forestorm': {
-    url: '/sprites/forestorm.png', // Save second image as forestorm.png
+    url: '/pokemon-web/sprites/forestorm.png', // GitHub Pages base path
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 fainted
@@ -37,7 +37,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Terraleaf (Forestorm evolution 2) - Ready for custom sprite!
   'terraleaf': {
-    url: '/sprites/terraleaf.png', // Save third sprite as terraleaf.png
+    url: '/pokemon-web/sprites/terraleaf.png', // GitHub Pages base path
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 fainted
