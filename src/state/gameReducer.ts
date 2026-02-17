@@ -43,6 +43,7 @@ export type GameAction =
   | { type: 'ADD_POKEMON'; payload: Pokemon }
   | { type: 'REMOVE_POKEMON'; payload: string }
   | { type: 'UPDATE_POKEMON'; payload: { id: string; updates: Partial<Pokemon> } }
+  | { type: 'REORDER_PARTY'; payload: Pokemon[] }
   | { type: 'ADD_ITEM'; payload: { id: string; quantity: number } }
   | { type: 'REMOVE_ITEM'; payload: { id: string; quantity: number } }
   | { type: 'START_BATTLE'; payload: BattleState }
@@ -88,6 +89,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         boxPokemon: updatePokemonInArray(state.boxPokemon),
       }
     }
+
+    case 'REORDER_PARTY':
+      return {
+        ...state,
+        party: action.payload
+      }
 
     case 'ADD_ITEM': {
       const existingItem = state.inventory.find(i => i.id === action.payload.id)

@@ -10,6 +10,7 @@ import PauseMenu from '@/components/UI/PauseMenu'
 import PokemonDetailModal from '@/components/UI/PokemonDetailModal'
 import KeyboardGuide from '@/components/UI/KeyboardGuide'
 import SaveIndicator from '@/components/UI/SaveIndicator'
+import PartyManagement from '@/components/UI/PartyManagement'
 import AnimatedSprite from '@/components/Sprite/AnimatedSprite'
 import './OverworldScreen.css'
 
@@ -19,6 +20,7 @@ const OverworldScreen = () => {
   const [isPaused, setIsPaused] = useState(false)
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null)
   const [showGuide, setShowGuide] = useState(false)
+  const [showPartyManagement, setShowPartyManagement] = useState(false)
 
   // Handle keyboard movement
   const handleKeyPress = useCallback((key: string) => {
@@ -31,6 +33,12 @@ const OverworldScreen = () => {
     // H for help
     if (key === 'h' || key === 'H') {
       setShowGuide(true)
+      return
+    }
+
+    // P for party management
+    if (key === 'p' || key === 'P') {
+      setShowPartyManagement(true)
       return
     }
 
@@ -99,6 +107,14 @@ const OverworldScreen = () => {
 
   const handleSave = () => {
     actions.saveGameState()
+  }
+
+  const handlePartyReorder = (newOrder: Pokemon[]) => {
+    // Update the entire party with new order
+    dispatch({
+      type: 'REORDER_PARTY',
+      payload: newOrder
+    })
   }
 
   return (
@@ -181,6 +197,14 @@ const OverworldScreen = () => {
         isOpen={showGuide}
         onClose={() => setShowGuide(false)}
       />
+
+      {showPartyManagement && (
+        <PartyManagement
+          party={state.party}
+          onReorder={handlePartyReorder}
+          onClose={() => setShowPartyManagement(false)}
+        />
+      )}
     </div>
   )
 }

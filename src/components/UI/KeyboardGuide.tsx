@@ -50,6 +50,12 @@ const KeyboardGuide = ({ isOpen, onClose }: KeyboardGuideProps) => {
                 <kbd>ESC</kbd> - Pause Menu
               </div>
               <div className="key-row">
+                <kbd>P</kbd> - Party Management
+              </div>
+              <div className="key-row">
+                <kbd>H</kbd> - Show Controls
+              </div>
+              <div className="key-row">
                 Click Pokemon - View Details
               </div>
             </div>

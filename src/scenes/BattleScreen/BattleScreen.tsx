@@ -115,20 +115,42 @@ const BattleScreen = () => {
     setIsProcessing(false)
   }
 
-  const enemyTurn = async () => {
+  const enemyTurn = async (targetPokemon?: Pokemon) => {
     await new Promise(resolve => setTimeout(resolve, 1000))
+
+    // Use provided target or current player Pokemon
+    const playerPokemon = targetPokemon || battle.playerPokemon
 
     const enemyMove = battle.enemyPokemon.moves[Math.floor(Math.random() * battle.enemyPokemon.moves.length)]
     addLog(`Wild ${battle.enemyPokemon.name} used ${enemyMove.name}!`)
 
     await new Promise(resolve => setTimeout(resolve, 800))
 
-    const result = calculateDamage(battle.enemyPokemon, battle.playerPokemon, enemyMove)
-    const newPlayerHp = Math.max(0, battle.playerPokemon.stats.hp - result.damage)
+    const result = calculateDamage(battle.enemyPokemon, playerPokemon, enemyMove)
+    const newPlayerHp = Math.max(0, playerPokemon.stats.hp - result.damage)
 
-    updatePlayerPokemon({
-      stats: { ...battle.playerPokemon.stats, hp: newPlayerHp }
-    })
+    // Update the correct Pokemon
+    if (targetPokemon) {
+      // Update battle state with new Pokemon's HP
+      dispatch({
+        type: 'UPDATE_BATTLE',
+        payload: {
+          playerPokemon: { ...playerPokemon, stats: { ...playerPokemon.stats, hp: newPlayerHp } }
+        }
+      })
+      // Also update in party
+      dispatch({
+        type: 'UPDATE_POKEMON',
+        payload: {
+          id: playerPokemon.id,
+          updates: { stats: { ...playerPokemon.stats, hp: newPlayerHp } }
+        }
+      })
+    } else {
+      updatePlayerPokemon({
+        stats: { ...playerPokemon.stats, hp: newPlayerHp }
+      })
+    }
 
     await new Promise(resolve => setTimeout(resolve, 600))
 
@@ -145,7 +167,7 @@ const BattleScreen = () => {
 
     // Check if player fainted
     if (newPlayerHp === 0) {
-      addLog(`${battle.playerPokemon.name} fainted!`)
+      addLog(`${playerPokemon.name} fainted!`)
       await new Promise(resolve => setTimeout(resolve, 1000))
       handleDefeat()
     }
@@ -239,8 +261,8 @@ const BattleScreen = () => {
     addLog(`Go, ${newPokemon.name}!`)
     await new Promise(resolve => setTimeout(resolve, 1000))
     
-    // Enemy gets a free turn after switching
-    await enemyTurn()
+    // Enemy gets a free turn after switching (pass newPokemon to ensure correct target)
+    await enemyTurn(newPokemon)
     setIsProcessing(false)
   }
 
