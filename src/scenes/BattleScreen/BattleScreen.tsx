@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useGame } from '@/state/GameContext'
 import { Move, Pokemon } from '@/types/game.types'
-import { calculateDamage, calculateCatchRate, calculateExperienceGain, shouldLevelUp, levelUpPokemon } from '@/utils/battleCalculations'
+import { calculateDamage, calculateCatchRate, calculateExperienceGain, shouldLevelUp, levelUpPokemonWithChanges, LevelUpResult } from '@/utils/battleCalculations'
 import { getEffectivenessMessage } from '@/utils/typeEffectiveness'
 import { checkEvolution, evolvePokemon } from '@/utils/evolution'
 import PokemonDisplay from '@/components/Battle/PokemonDisplay'
 import BattleLog from '@/components/Battle/BattleLog'
 import { BattleActions, MoveSelection, BagMenu } from '@/components/Battle/BattleActions'
 import EvolutionScreen from '@/scenes/EvolutionScreen/EvolutionScreen'
+import LevelUpModal from '@/components/UI/LevelUpModal'
 import './BattleScreen.css'
 
 type BattleMenu = 'main' | 'moves' | 'bag'
@@ -18,6 +19,7 @@ const BattleScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [battleLog, setBattleLog] = useState<string[]>([])
   const [evolvingPokemon, setEvolvingPokemon] = useState<Pokemon | null>(null)
+  const [levelUpData, setLevelUpData] = useState<(LevelUpResult & { oldLevel: number }) | null>(null)
 
   const battle = state.battle
 
@@ -230,20 +232,35 @@ const BattleScreen = () => {
     // Check level up
     let pokemon = { ...battle.playerPokemon, experience: newExp }
     if (shouldLevelUp(pokemon)) {
-      pokemon = levelUpPokemon(pokemon)
+      const oldLevel = pokemon.level
+      const levelUpResult = levelUpPokemonWithChanges(pokemon)
+      pokemon = levelUpResult.pokemon
+      
       addLog(`${pokemon.name} grew to level ${pokemon.level}!`)
       updatePlayerPokemon(pokemon)
-      await new Promise(resolve => setTimeout(resolve, 1500))
       
-      // Check for evolution after level up
-      if (checkEvolution(pokemon)) {
-        setEvolvingPokemon(pokemon)
-        return // Don't end battle yet, wait for evolution
-      }
+      // Show level up modal
+      setLevelUpData({ ...levelUpResult, oldLevel })
+      return // Wait for modal to close
     }
 
     actions.autoSave()
     actions.endBattle()
+  }
+
+  const handleLevelUpClose = () => {
+    if (!levelUpData) return
+    
+    setLevelUpData(null)
+    
+    // Check for evolution after level up
+    if (checkEvolution(levelUpData.pokemon)) {
+      setEvolvingPokemon(levelUpData.pokemon)
+    } else {
+      // No evolution, end battle
+      actions.autoSave()
+      actions.endBattle()
+    }
   }
 
   const handleEvolutionComplete = (evolved: boolean) => {
@@ -334,6 +351,15 @@ const BattleScreen = () => {
         <EvolutionScreen
           pokemon={evolvingPokemon}
           onComplete={handleEvolutionComplete}
+        />
+      )}
+
+      {levelUpData && (
+        <LevelUpModal
+          pokemon={levelUpData.pokemon}
+          oldLevel={levelUpData.oldLevel}
+          statChanges={levelUpData.statChanges}
+          onClose={handleLevelUpClose}
         />
       )}
     </div>

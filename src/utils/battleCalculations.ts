@@ -80,6 +80,35 @@ export function shouldLevelUp(pokemon: Pokemon): boolean {
   return pokemon.experience >= pokemon.experienceToNextLevel
 }
 
+export interface LevelUpResult {
+  pokemon: Pokemon
+  statChanges: {
+    hp: number
+    attack: number
+    defense: number
+    specialAttack: number
+    specialDefense: number
+    speed: number
+  }
+}
+
+export function levelUpPokemonWithChanges(pokemon: Pokemon): LevelUpResult {
+  const oldStats = { ...pokemon.stats }
+  const leveledPokemon = levelUpPokemon(pokemon)
+  
+  return {
+    pokemon: leveledPokemon,
+    statChanges: {
+      hp: leveledPokemon.stats.maxHp - oldStats.maxHp,
+      attack: leveledPokemon.stats.attack - oldStats.attack,
+      defense: leveledPokemon.stats.defense - oldStats.defense,
+      specialAttack: leveledPokemon.stats.specialAttack - oldStats.specialAttack,
+      specialDefense: leveledPokemon.stats.specialDefense - oldStats.specialDefense,
+      speed: leveledPokemon.stats.speed - oldStats.speed,
+    }
+  }
+}
+
 export function levelUpPokemon(pokemon: Pokemon): Pokemon {
   const newLevel = pokemon.level + 1
   const statIncrease = 2 + Math.floor(Math.random() * 3) // 2-4 points
