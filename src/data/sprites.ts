@@ -137,11 +137,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 2048,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (2048x2048 source)
-    cropX: 400,
-    cropY: 200,
-    cropWidth: 1300,
-    cropHeight: 1700,
   } as SpriteConfig,
   
   // Flamepup (Wild Fire type) - Simple static sprite
@@ -151,11 +146,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 2048,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (2048x2048 source)
-    cropX: 400,
-    cropY: 200,
-    cropWidth: 1300,
-    cropHeight: 1700,
   } as SpriteConfig,
   
   // Aquakid (Wild Water type) - Simple static sprite
@@ -176,11 +166,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 2048,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (2048x2048 source)
-    cropX: 400,
-    cropY: 200,
-    cropWidth: 1300,
-    cropHeight: 1700,
   } as SpriteConfig,
   
   // Voltrodent (Sparkrat evolution) - Simple static sprite
@@ -199,11 +184,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 2048,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (2048x2048 source)
-    cropX: 400,
-    cropY: 200,
-    cropWidth: 1300,
-    cropHeight: 1700,
   } as SpriteConfig,
   
   // Boulderjaw (Rockbite evolution) - Simple static sprite
