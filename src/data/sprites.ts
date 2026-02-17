@@ -1,53 +1,55 @@
 import { SpriteConfig, PokemonSprite } from '@/types/sprite.types'
 
 // Sprite registry for all Pokemon
-// Add your custom sprites here!
+// 
+// STATIC SPRITE FORMAT (single image):
+// {
+//   url: '/sprites/pokemon.png',
+//   frameWidth: 128,
+//   frameHeight: 128,
+//   frameCount: 1
+// }
+//
+// ANIMATED SPRITE FORMAT (sprite sheet with multiple frames):
+// {
+//   url: '/sprites/pokemon.png',
+//   frameWidth: 64,
+//   frameHeight: 64,
+//   frameCount: 8,
+//   fps: 8,
+//   loop: true,
+//   animations: {
+//     idle: { startFrame: 0, frameCount: 4 },
+//     battle: { startFrame: 4, frameCount: 3 },
+//     evolving: { startFrame: 7, frameCount: 1 }
+//   }
+// }
+//
 export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   // ===== STARTER POKEMON =====
   
-  // Leafeon (Grass Starter) - Custom sprite with animations
+  // Leafeon (Grass Starter) - Simple static sprite
   'leafeon': {
     url: '/sprites/leafeon.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8, // 4 idle + 3 walking + 1 evolving
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
-      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
-      evolving: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (glowing)
-    }
+    frameWidth: 128,
+    frameHeight: 128,
+    frameCount: 1, // Single static sprite
   } as SpriteConfig,
   
-  // Forestorm (Leafeon evolution 1) - Custom sprite with animations
+  // Forestorm (Leafeon evolution 1) - Simple static sprite
   'forestorm': {
     url: '/sprites/forestorm.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8, // 4 idle + 3 walking + 1 fainted
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
-      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
-      fainted: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (defeated)
-    }
+    frameWidth: 128,
+    frameHeight: 128,
+    frameCount: 1, // Single static sprite
   } as SpriteConfig,
   
-  // Terraleaf (Forestorm evolution 2) - Ready for custom sprite!
+  // Terraleaf (Forestorm evolution 2) - Simple static sprite
   'terraleaf': {
     url: '/sprites/terraleaf.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8, // 4 idle + 3 walking + 1 fainted
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
-      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
-      fainted: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (defeated)
-    }
+    frameWidth: 128,
+    frameHeight: 128,
+    frameCount: 1, // Single static sprite
   } as SpriteConfig,
 
   // ========== FIRE STARTER LINE ==========

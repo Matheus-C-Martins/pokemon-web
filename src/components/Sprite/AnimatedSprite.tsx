@@ -26,6 +26,7 @@ const AnimatedSprite = ({
 
   const sprite = getPokemonSprite(pokemonName)
   const isAnimated = isSpriteConfig(sprite)
+  const isStatic = isAnimated && sprite.frameCount === 1
 
   useEffect(() => {
     if (!isAnimated || !canvasRef.current) return
@@ -55,7 +56,29 @@ const AnimatedSprite = ({
       imageRef.current = img
     }
 
-    // Animation configuration
+    // For static sprites (single frame), just draw once when image loads
+    if (isStatic) {
+      const drawStatic = () => {
+        if (!imageRef.current?.complete) {
+          requestAnimationFrame(drawStatic)
+          return
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
+        ctx.drawImage(
+          imageRef.current,
+          0, 0,
+          config.frameWidth, config.frameHeight,
+          0, 0,
+          canvas.width, canvas.height
+        )
+      }
+      drawStatic()
+      return
+    }
+
+    // Animation configuration for multi-frame sprites
     const fps = config.fps || 8
     const frameDuration = 1000 / fps
     
@@ -110,7 +133,7 @@ const AnimatedSprite = ({
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [isAnimated, sprite, animation, currentFrame])
+  }, [isAnimated, isStatic, sprite, animation, currentFrame])
 
   // Reset frame when animation changes
   useEffect(() => {
