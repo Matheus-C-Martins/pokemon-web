@@ -89,7 +89,7 @@ export interface BattleState {
 }
 
 // Scene Types
-export type SceneType = 'title' | 'overworld' | 'battle' | 'evolution' | 'menu' | 'pokemonMenu' | 'bagMenu'
+export type SceneType = 'title' | 'starterSelection' | 'overworld' | 'battle' | 'evolution' | 'menu' | 'pokemonMenu' | 'bagMenu'
 
 export interface Scene {
   type: SceneType

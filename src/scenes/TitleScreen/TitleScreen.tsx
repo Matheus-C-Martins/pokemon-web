@@ -8,7 +8,7 @@ const TitleScreen = () => {
 
   const handleNewGame = () => {
     actions.resetGame()
-    actions.changeScene('overworld')
+    actions.changeScene('starterSelection')
   }
 
   const handleContinue = () => {

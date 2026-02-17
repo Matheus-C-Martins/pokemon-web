@@ -20,15 +20,6 @@ const OverworldScreen = () => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null)
   const [showGuide, setShowGuide] = useState(false)
 
-  // Initialize with starter Pokemon if party is empty
-  useEffect(() => {
-    if (state.party.length === 0) {
-      // Give player a starter Pokemon
-      const starter = createStarterPokemon('Leafeon', 'grass')
-      actions.addPokemon(starter)
-    }
-  }, [state.party.length, actions])
-
   // Handle keyboard movement
   const handleKeyPress = useCallback((key: string) => {
     // ESC for pause menu (toggle)
