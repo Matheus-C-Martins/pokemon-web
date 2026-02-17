@@ -18,6 +18,7 @@ const AnimatedSprite = ({
 }: AnimatedSpriteProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [currentFrame, setCurrentFrame] = useState(0)
+  const [imageError, setImageError] = useState(false)
   const imageRef = useRef<HTMLImageElement | null>(null)
   const animationFrameRef = useRef<number>()
   const lastFrameTimeRef = useRef<number>(0)
@@ -36,10 +37,20 @@ const AnimatedSprite = ({
     // Load sprite sheet
     if (!imageRef.current) {
       const img = new Image()
-      img.src = config.url
       img.onload = () => {
         imageRef.current = img
+        setImageError(false)
       }
+      img.onerror = () => {
+        console.error(`Failed to load sprite: ${config.url}`)
+        setImageError(true)
+      }
+      // Prepend base URL for correct path resolution in dev and production
+      const baseUrl = (import.meta as any).env.BASE_URL as string
+      const spriteUrl = config.url.startsWith('/') 
+        ? baseUrl.replace(/\/$/, '') + config.url 
+        : config.url
+      img.src = spriteUrl
       imageRef.current = img
     }
 
@@ -106,10 +117,11 @@ const AnimatedSprite = ({
     lastFrameTimeRef.current = 0
   }, [animation])
 
-  if (!isAnimated) {
+  if (!isAnimated || imageError) {
     // Fallback to emoji or string
     const spriteContent = typeof sprite === 'object' && 'emoji' in sprite ? sprite.emoji : sprite
-    return <span className={`sprite-emoji sprite-${size} ${className}`}>{spriteContent}</span>
+    const fallback = isAnimated ? '❓' : spriteContent
+    return <span className={`sprite-emoji sprite-${size} ${className}`}>{fallback}</span>
   }
 
   // Render animated sprite

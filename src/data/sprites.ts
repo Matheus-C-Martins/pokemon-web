@@ -7,7 +7,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Leafeon (Grass Starter) - Custom sprite with animations
   'leafeon': {
-    url: '/pokemon-web/sprites/leafeon.png', // GitHub Pages base path
+    url: '/sprites/leafeon.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 evolving
@@ -22,7 +22,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Forestorm (Leafeon evolution 1) - Custom sprite with animations
   'forestorm': {
-    url: '/pokemon-web/sprites/forestorm.png', // GitHub Pages base path
+    url: '/sprites/forestorm.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 fainted
@@ -37,7 +37,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Terraleaf (Forestorm evolution 2) - Ready for custom sprite!
   'terraleaf': {
-    url: '/pokemon-web/sprites/terraleaf.png', // GitHub Pages base path
+    url: '/sprites/terraleaf.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8, // 4 idle + 3 walking + 1 fainted
@@ -54,7 +54,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Embear (Fire Starter) - Needs sprite!
   'embear': {
-    url: '/pokemon-web/sprites/embear.png',
+    url: '/sprites/embear.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -69,7 +69,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Blazeclaw (Embear evolution 1) - Needs sprite!
   'blazeclaw': {
-    url: '/pokemon-web/sprites/blazeclaw.png',
+    url: '/sprites/blazeclaw.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -84,7 +84,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Infernotitan (Blazeclaw evolution 2) - Needs sprite!
   'infernotitan': {
-    url: '/pokemon-web/sprites/infernotitan.png',
+    url: '/sprites/infernotitan.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -101,7 +101,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Aquarius (Water Starter) - Needs sprite!
   'aquarius': {
-    url: '/pokemon-web/sprites/aquarius.png',
+    url: '/sprites/aquarius.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -116,7 +116,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Torrentseal (Aquarius evolution 1) - Needs sprite!
   'torrentseal': {
-    url: '/pokemon-web/sprites/torrentseal.png',
+    url: '/sprites/torrentseal.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -131,7 +131,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Hydroknight (Torrentseal evolution 2) - Needs sprite!
   'hydroknight': {
-    url: '/pokemon-web/sprites/hydroknight.png',
+    url: '/sprites/hydroknight.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -148,7 +148,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Grassling (Wild Grass type) - Needs sprite!
   'grassling': {
-    url: '/pokemon-web/sprites/grassling.png',
+    url: '/sprites/grassling.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -163,7 +163,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Flamepup (Wild Fire type) - Needs sprite!
   'flamepup': {
-    url: '/pokemon-web/sprites/flamepup.png',
+    url: '/sprites/flamepup.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -178,7 +178,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Aquakid (Wild Water type) - Needs sprite!
   'aquakid': {
-    url: '/pokemon-web/sprites/aquakid.png',
+    url: '/sprites/aquakid.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -195,7 +195,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Sparkrat (Wild Electric type) - Needs sprite!
   'sparkrat': {
-    url: '/pokemon-web/sprites/sparkrat.png',
+    url: '/sprites/sparkrat.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -210,7 +210,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Voltrodent (Sparkrat evolution) - Needs sprite!
   'voltrodent': {
-    url: '/pokemon-web/sprites/voltrodent.png',
+    url: '/sprites/voltrodent.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -225,7 +225,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Rockbite (Wild Rock/Ground type) - Needs sprite!
   'rockbite': {
-    url: '/pokemon-web/sprites/rockbite.png',
+    url: '/sprites/rockbite.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -240,7 +240,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Boulderjaw (Rockbite evolution) - Needs sprite!
   'boulderjaw': {
-    url: '/pokemon-web/sprites/boulderjaw.png',
+    url: '/sprites/boulderjaw.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -255,7 +255,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Fluttermoth (Wild Bug/Flying type) - Needs sprite!
   'fluttermoth': {
-    url: '/pokemon-web/sprites/fluttermoth.png',
+    url: '/sprites/fluttermoth.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
@@ -270,7 +270,7 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   
   // Celestialwing (Fluttermoth evolution) - Needs sprite!
   'celestialwing': {
-    url: '/pokemon-web/sprites/celestialwing.png',
+    url: '/sprites/celestialwing.png',
     frameWidth: 64,
     frameHeight: 64,
     frameCount: 8,
