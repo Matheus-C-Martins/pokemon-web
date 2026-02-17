@@ -5,25 +5,50 @@ import { SpriteConfig, PokemonSprite } from '@/types/sprite.types'
 export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   // ===== STARTER POKEMON =====
   
-  // Leafeon (Grass Starter) - EXAMPLE with custom sprite
+  // Leafeon (Grass Starter) - Custom sprite with animations
   'leafeon': {
-    url: '/sprites/leafeon.png', // Place your sprite sheet in public/sprites/
+    url: '/sprites/leafeon.png', // Save first image as leafeon.png
     frameWidth: 64,
     frameHeight: 64,
-    frameCount: 4, // Total frames in your sprite sheet
+    frameCount: 8, // 4 idle + 3 walking + 1 evolving
     fps: 8,
     loop: true,
     animations: {
-      idle: { startFrame: 0, frameCount: 4 }, // Frames 0-3 for idle animation
-      battle: { startFrame: 0, frameCount: 4 }, // Can use same frames or define different ones
+      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
+      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
+      evolving: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (glowing)
     }
   } as SpriteConfig,
   
-  // Forestorm (Leafeon evolution 1)
-  'forestorm': '🌳',
+  // Forestorm (Leafeon evolution 1) - Custom sprite with animations
+  'forestorm': {
+    url: '/sprites/forestorm.png', // Save second image as forestorm.png
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8, // 4 idle + 3 walking + 1 fainted
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
+      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
+      fainted: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (defeated)
+    }
+  } as SpriteConfig,
   
-  // Terraleaf (Leafeon evolution 2)
-  'terraleaf': '🌲',
+  // Terraleaf (Forestorm evolution 2) - Ready for custom sprite!
+  'terraleaf': {
+    url: '/sprites/terraleaf.png', // Save third sprite as terraleaf.png
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8, // 4 idle + 3 walking + 1 fainted
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 }, // Top row: frames 0-3
+      battle: { startFrame: 4, frameCount: 3 }, // Bottom row: frames 4-6 (walking)
+      fainted: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (defeated)
+    }
+  } as SpriteConfig,
   
   // Embear (Fire Starter)
   'embear': '🔥',
