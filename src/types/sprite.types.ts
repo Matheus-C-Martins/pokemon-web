@@ -16,6 +16,7 @@ export interface SpriteConfig {
   // Animation settings (optional - only needed for animated sprites)
   fps?: number // Frames per second (default: 8)
   loop?: boolean // Loop animation (default: true)
+  maintainAspectRatio?: boolean // Maintain aspect ratio instead of stretching (default: false)
   
   // Different animations for different states (optional - only for animated sprites)
   animations?: {

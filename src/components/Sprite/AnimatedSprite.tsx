@@ -66,13 +66,45 @@ const AnimatedSprite = ({
 
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
-        ctx.drawImage(
-          imageRef.current,
-          0, 0,
-          config.frameWidth, config.frameHeight,
-          0, 0,
-          canvas.width, canvas.height
-        )
+        
+        if (config.maintainAspectRatio) {
+          // Calculate aspect-ratio-preserving dimensions
+          const imgAspect = config.frameWidth / config.frameHeight
+          const canvasAspect = canvas.width / canvas.height
+          
+          let drawWidth, drawHeight, offsetX, offsetY
+          
+          if (imgAspect > canvasAspect) {
+            // Image is wider - fit to width
+            drawWidth = canvas.width
+            drawHeight = canvas.width / imgAspect
+            offsetX = 0
+            offsetY = (canvas.height - drawHeight) / 2
+          } else {
+            // Image is taller - fit to height
+            drawHeight = canvas.height
+            drawWidth = canvas.height * imgAspect
+            offsetX = (canvas.width - drawWidth) / 2
+            offsetY = 0
+          }
+          
+          ctx.drawImage(
+            imageRef.current,
+            0, 0,
+            config.frameWidth, config.frameHeight,
+            offsetX, offsetY,
+            drawWidth, drawHeight
+          )
+        } else {
+          // Stretch to fill canvas
+          ctx.drawImage(
+            imageRef.current,
+            0, 0,
+            config.frameWidth, config.frameHeight,
+            0, 0,
+            canvas.width, canvas.height
+          )
+        }
       }
       drawStatic()
       return
@@ -115,13 +147,45 @@ const AnimatedSprite = ({
       const sy = Math.floor((actualFrame * config.frameWidth) / imageRef.current.width) * config.frameHeight
 
       ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
-      ctx.drawImage(
-        imageRef.current,
-        sx, sy,
-        config.frameWidth, config.frameHeight,
-        0, 0,
-        canvas.width, canvas.height
-      )
+      
+      if (config.maintainAspectRatio) {
+        // Calculate aspect-ratio-preserving dimensions
+        const imgAspect = config.frameWidth / config.frameHeight
+        const canvasAspect = canvas.width / canvas.height
+        
+        let drawWidth, drawHeight, offsetX, offsetY
+        
+        if (imgAspect > canvasAspect) {
+          // Image is wider - fit to width
+          drawWidth = canvas.width
+          drawHeight = canvas.width / imgAspect
+          offsetX = 0
+          offsetY = (canvas.height - drawHeight) / 2
+        } else {
+          // Image is taller - fit to height
+          drawHeight = canvas.height
+          drawWidth = canvas.height * imgAspect
+          offsetX = (canvas.width - drawWidth) / 2
+          offsetY = 0
+        }
+        
+        ctx.drawImage(
+          imageRef.current,
+          sx, sy,
+          config.frameWidth, config.frameHeight,
+          offsetX, offsetY,
+          drawWidth, drawHeight
+        )
+      } else {
+        // Stretch to fill canvas
+        ctx.drawImage(
+          imageRef.current,
+          sx, sy,
+          config.frameWidth, config.frameHeight,
+          0, 0,
+          canvas.width, canvas.height
+        )
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate)
     }
