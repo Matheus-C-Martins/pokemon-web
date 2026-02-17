@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import MobileBlocker from './components/MobileBlocker/MobileBlocker'
+import { GameProvider } from './state/GameContext'
+import SceneManager from './scenes/SceneManager'
 import './App.css'
 
 function App() {
@@ -21,16 +23,11 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <div className="game-container">
-        <h1>Pokemon Clone</h1>
-        <p className="subtitle">A minimalist web-based Pokemon adventure</p>
-        <div className="info-box">
-          <p>🎮 Project initialized successfully!</p>
-          <p>Ready to start building the game...</p>
-        </div>
+    <GameProvider>
+      <div className="app">
+        <SceneManager />
       </div>
-    </div>
+    </GameProvider>
   )
 }
 
