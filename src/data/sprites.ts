@@ -116,49 +116,46 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
 
   // ========== WATER STARTER LINE ==========
   
-  // Aquarius (Water Starter) - Needs sprite!
+  // Aquarius (Water Starter) - Simple static sprite
   'aquarius': {
     url: '/sprites/aquarius.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      evolving: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
   
-  // Torrentseal (Aquarius evolution 1) - Needs sprite!
+  // Torrentseal (Aquarius evolution 1) - Simple static sprite
   'torrentseal': {
     url: '/sprites/torrentseal.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      evolving: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
   
-  // Hydroknight (Torrentseal evolution 2) - Needs sprite!
+  // Hydroknight (Torrentseal evolution 2) - Simple static sprite
   'hydroknight': {
     url: '/sprites/hydroknight.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      fainted: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in MORE on character (smaller crop = more zoom)
+    cropX: 250,
+    cropY: 150,
+    cropWidth: 500,
+    cropHeight: 650,
   } as SpriteConfig,
 
   // ========== WILD POKEMON ==========
