@@ -28,6 +28,13 @@ export interface PokemonStats {
   speed: number
 }
 
+export interface Evolution {
+  evolvesInto: string
+  level: number
+  sprite: string
+  types: PokemonType[]
+}
+
 export interface Pokemon {
   id: string
   name: string
@@ -40,6 +47,7 @@ export interface Pokemon {
   status?: 'normal' | 'poisoned' | 'burned' | 'paralyzed' | 'asleep' | 'frozen'
   sprite: string
   isWild?: boolean
+  evolution?: Evolution
 }
 
 // Item Types
@@ -81,7 +89,7 @@ export interface BattleState {
 }
 
 // Scene Types
-export type SceneType = 'title' | 'overworld' | 'battle' | 'menu' | 'pokemonMenu' | 'bagMenu'
+export type SceneType = 'title' | 'overworld' | 'battle' | 'evolution' | 'menu' | 'pokemonMenu' | 'bagMenu'
 
 export interface Scene {
   type: SceneType

@@ -1,4 +1,5 @@
 import { Pokemon } from '@/types/game.types'
+import { getEvolution } from './evolutions'
 
 export function generateWildPokemon(level: number = 5): Pokemon {
   // Simple starter wild Pokemon - we'll expand this later
@@ -68,6 +69,7 @@ export function generateWildPokemon(level: number = 5): Pokemon {
     status: 'normal',
     sprite: `🐾`,
     isWild: true,
+    evolution: getEvolution(template.name),
   }
 
   return wild
@@ -141,5 +143,6 @@ export function createStarterPokemon(_name: string, type: 'grass' | 'fire' | 'wa
     status: 'normal',
     sprite: template.sprite,
     isWild: false,
+    evolution: getEvolution(template.name),
   }
 }

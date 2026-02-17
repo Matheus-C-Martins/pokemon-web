@@ -3,9 +3,11 @@ import { useGame } from '@/state/GameContext'
 import { Move, Pokemon } from '@/types/game.types'
 import { calculateDamage, calculateCatchRate, calculateExperienceGain, shouldLevelUp, levelUpPokemon } from '@/utils/battleCalculations'
 import { getEffectivenessMessage } from '@/utils/typeEffectiveness'
+import { checkEvolution, evolvePokemon } from '@/utils/evolution'
 import PokemonDisplay from '@/components/Battle/PokemonDisplay'
 import BattleLog from '@/components/Battle/BattleLog'
 import { BattleActions, MoveSelection, BagMenu } from '@/components/Battle/BattleActions'
+import EvolutionScreen from '@/scenes/EvolutionScreen/EvolutionScreen'
 import './BattleScreen.css'
 
 type BattleMenu = 'main' | 'moves' | 'bag'
@@ -15,6 +17,7 @@ const BattleScreen = () => {
   const [currentMenu, setCurrentMenu] = useState<BattleMenu>('main')
   const [isProcessing, setIsProcessing] = useState(false)
   const [battleLog, setBattleLog] = useState<string[]>([])
+  const [evolvingPokemon, setEvolvingPokemon] = useState<Pokemon | null>(null)
 
   const battle = state.battle
 
@@ -231,10 +234,42 @@ const BattleScreen = () => {
       addLog(`${pokemon.name} grew to level ${pokemon.level}!`)
       updatePlayerPokemon(pokemon)
       await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Check for evolution after level up
+      if (checkEvolution(pokemon)) {
+        setEvolvingPokemon(pokemon)
+        return // Don't end battle yet, wait for evolution
+      }
     }
 
     actions.autoSave()
     actions.endBattle()
+  }
+
+  const handleEvolutionComplete = (evolved: boolean) => {
+    if (evolved && evolvingPokemon) {
+      const evolvedPokemon = evolvePokemon(evolvingPokemon)
+      addLog(`${evolvingPokemon.name} evolved into ${evolvedPokemon.name}!`)
+      
+      // Update Pokemon in party
+      dispatch({
+        type: 'UPDATE_POKEMON',
+        payload: {
+          id: evolvingPokemon.id,
+          updates: evolvedPokemon
+        }
+      })
+    } else if (evolvingPokemon) {
+      addLog(`${evolvingPokemon.name} stopped evolving.`)
+    }
+    
+    setEvolvingPokemon(null)
+    
+    // Now end the battle
+    setTimeout(() => {
+      actions.autoSave()
+      actions.endBattle()
+    }, 1000)
   }
 
   const handleDefeat = async () => {
@@ -294,6 +329,13 @@ const BattleScreen = () => {
           </div>
         </div>
       </div>
+
+      {evolvingPokemon && (
+        <EvolutionScreen
+          pokemon={evolvingPokemon}
+          onComplete={handleEvolutionComplete}
+        />
+      )}
     </div>
   )
 }
