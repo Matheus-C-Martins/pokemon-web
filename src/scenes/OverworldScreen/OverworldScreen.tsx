@@ -71,7 +71,18 @@ const OverworldScreen = () => {
         direction = 'right'
         break
       default:
-        retAuto-save before battle
+        return
+    }
+
+    // Check if movement is valid
+    if (canMoveTo(currentMap, newX, newY)) {
+      actions.movePlayer(newX, newY, direction)
+
+      // Check for wild encounter
+      if (checkEncounter(currentMap, newX, newY) && state.party.length > 0) {
+        const wildPokemon = generateWildPokemon(5 + Math.floor(Math.random() * 3))
+        
+        // Auto-save before battle
         actions.autoSave()
         
         // Start battle
@@ -85,23 +96,11 @@ const OverworldScreen = () => {
         })
       }
     }
-  }, [state.player, currentMap, state.party, dispatch, actions, isPaused
-      if (checkEncounter(currentMap, newX, newY) && state.party.length > 0) {
-        const wildPokemon = generateWildPokemon(5 + Math.floor(Math.random() * 3))
-        
-        // Start battle
-        actions.startBattle({
-          playerPokemon: state.party[0],
-          enemyPokemon: wildPokemon,
-          turn: Math.random() > 0.5 ? 'player' : 'enemy',
-          battleLog: [`A wild ${wildPokemon.name} appeared!`],
-          isWildBattle: true,
-          canEscape: true,
-        })
-      }
-    }
-  }, [state.player, currentMap, state.party, dispatch, actions])
-const handleQuitToTitle = () => {
+  }, [state.player, currentMap, state.party, dispatch, actions, isPaused])
+
+  useKeyboard(handleKeyPress)
+
+  const handleQuitToTitle = () => {
     actions.autoSave()
     actions.changeScene('title')
   }
@@ -185,10 +184,7 @@ const handleQuitToTitle = () => {
       <KeyboardGuide
         isOpen={showGuide}
         onClose={() => setShowGuide(false)}
-      / <span className="value">{state.progress.badges}/8</span>
-          </div>
-        </div>
-      </div>
+      />
     </div>
   )
 }
