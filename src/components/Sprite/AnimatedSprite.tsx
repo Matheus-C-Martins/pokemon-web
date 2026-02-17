@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { getPokemonSprite } from '@/data/sprites'
-import { isSpriteConfig, SpriteAnimation } from '@/types/sprite.types'
+import { isSpriteConfig, isEmojiSprite } from '@/types/sprite.types'
+import type { SpriteAnimation } from '@/types/sprite.types'
 import './AnimatedSprite.css'
 
 interface AnimatedSpriteProps {
@@ -119,8 +120,16 @@ const AnimatedSprite = ({
 
   if (!isAnimated || imageError) {
     // Fallback to emoji or string
-    const spriteContent = typeof sprite === 'object' && 'emoji' in sprite ? sprite.emoji : sprite
-    const fallback = isAnimated ? '❓' : spriteContent
+    let fallback: string
+    if (imageError) {
+      fallback = '❓'
+    } else if (isEmojiSprite(sprite)) {
+      fallback = sprite.emoji
+    } else if (typeof sprite === 'string') {
+      fallback = sprite
+    } else {
+      fallback = '❓'
+    }
     return <span className={`sprite-emoji sprite-${size} ${className}`}>{fallback}</span>
   }
 
