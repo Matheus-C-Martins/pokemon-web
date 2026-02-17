@@ -31,24 +31,24 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
   // Leafeon (Grass Starter) - Simple static sprite
   'leafeon': {
     url: '/sprites/leafeon.png',
-    frameWidth: 128,
-    frameHeight: 128,
+    frameWidth: 1344,
+    frameHeight: 768,
     frameCount: 1, // Single static sprite
   } as SpriteConfig,
   
   // Forestorm (Leafeon evolution 1) - Simple static sprite
   'forestorm': {
     url: '/sprites/forestorm.png',
-    frameWidth: 128,
-    frameHeight: 128,
+    frameWidth: 1344,
+    frameHeight: 768,
     frameCount: 1, // Single static sprite
   } as SpriteConfig,
   
   // Terraleaf (Forestorm evolution 2) - Simple static sprite
   'terraleaf': {
     url: '/sprites/terraleaf.png',
-    frameWidth: 128,
-    frameHeight: 128,
+    frameWidth: 1344,
+    frameHeight: 768,
     frameCount: 1, // Single static sprite
   } as SpriteConfig,
 
