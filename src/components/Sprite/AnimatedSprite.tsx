@@ -9,13 +9,15 @@ interface AnimatedSpriteProps {
   animation?: SpriteAnimation
   size?: 'small' | 'medium' | 'large' | 'huge'
   className?: string
+  flipHorizontal?: boolean // Flip sprite horizontally (for player's Pokemon)
 }
 
 const AnimatedSprite = ({ 
   pokemonName, 
   animation = 'idle',
   size = 'medium',
-  className = ''
+  className = '',
+  flipHorizontal = false
 }: AnimatedSpriteProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [currentFrame, setCurrentFrame] = useState(0)
@@ -73,6 +75,12 @@ const AnimatedSprite = ({
         const srcWidth = config.cropWidth ?? config.frameWidth
         const srcHeight = config.cropHeight ?? config.frameHeight
         
+        // Apply horizontal flip if needed
+        if (flipHorizontal) {
+          ctx.save()
+          ctx.scale(-1, 1)
+        }
+        
         if (config.maintainAspectRatio) {
           // Calculate aspect-ratio-preserving dimensions
           const imgAspect = srcWidth / srcHeight
@@ -94,22 +102,32 @@ const AnimatedSprite = ({
             offsetY = 0
           }
           
+          // Adjust position if flipped
+          const finalX = flipHorizontal ? -(offsetX + drawWidth) : offsetX
+          
           ctx.drawImage(
             imageRef.current,
             srcX, srcY,
             srcWidth, srcHeight,
-            offsetX, offsetY,
+            finalX, offsetY,
             drawWidth, drawHeight
           )
         } else {
           // Stretch to fill canvas
+          const finalX = flipHorizontal ? -canvas.width : 0
+          
           ctx.drawImage(
             imageRef.current,
             srcX, srcY,
             srcWidth, srcHeight,
-            0, 0,
+            finalX, 0,
             canvas.width, canvas.height
           )
+        }
+        
+        // Restore canvas state if flipped
+        if (flipHorizontal) {
+          ctx.restore()
         }
       }
       drawStatic()
@@ -160,6 +178,12 @@ const AnimatedSprite = ({
 
       ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
       
+      // Apply horizontal flip if needed
+      if (flipHorizontal) {
+        ctx.save()
+        ctx.scale(-1, 1)
+      }
+      
       if (config.maintainAspectRatio) {
         // Calculate aspect-ratio-preserving dimensions
         const imgAspect = srcWidth / srcHeight
@@ -181,22 +205,32 @@ const AnimatedSprite = ({
           offsetY = 0
         }
         
+        // Adjust position if flipped
+        const finalX = flipHorizontal ? -(offsetX + drawWidth) : offsetX
+        
         ctx.drawImage(
           imageRef.current,
           srcX, srcY,
           srcWidth, srcHeight,
-          offsetX, offsetY,
+          finalX, offsetY,
           drawWidth, drawHeight
         )
       } else {
         // Stretch to fill canvas
+        const finalX = flipHorizontal ? -canvas.width : 0
+        
         ctx.drawImage(
           imageRef.current,
           srcX, srcY,
           srcWidth, srcHeight,
-          0, 0,
+          finalX, 0,
           canvas.width, canvas.height
         )
+      }
+      
+      // Restore canvas state if flipped
+      if (flipHorizontal) {
+        ctx.restore()
       }
 
       animationFrameRef.current = requestAnimationFrame(animate)
@@ -209,7 +243,7 @@ const AnimatedSprite = ({
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [isAnimated, isStatic, sprite, animation, currentFrame])
+  }, [isAnimated, isStatic, sprite, animation, currentFrame, flipHorizontal])
 
   // Reset frame when animation changes
   useEffect(() => {

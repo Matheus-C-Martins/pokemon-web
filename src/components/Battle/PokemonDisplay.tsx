@@ -19,6 +19,7 @@ const PokemonDisplay = ({ pokemon, isPlayer }: PokemonDisplayProps) => {
           pokemonName={pokemon.name}
           animation={isFainted ? 'fainted' : 'battle'}
           size="large"
+          flipHorizontal={isPlayer}
         />
         {!isPlayer && pokemon.isWild && (
           <div className="wild-badge">WILD</div>
