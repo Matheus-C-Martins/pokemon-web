@@ -168,6 +168,7 @@ const BattleScreen = () => {
       actions.addPokemon(caughtPokemon)
       
       await new Promise(resolve => setTimeout(resolve, 2000))
+      actions.autoSave()
       actions.endBattle()
     } else {
       addLog('Oh no! The Pokemon broke free!')
@@ -210,6 +211,7 @@ const BattleScreen = () => {
 
     addLog('Got away safely!')
     await new Promise(resolve => setTimeout(resolve, 1000))
+    actions.autoSave()
     actions.endBattle()
   }
 
@@ -231,6 +233,7 @@ const BattleScreen = () => {
       await new Promise(resolve => setTimeout(resolve, 1500))
     }
 
+    actions.autoSave()
     actions.endBattle()
   }
 
@@ -241,6 +244,7 @@ const BattleScreen = () => {
     updatePlayerPokemon({
       stats: { ...battle.playerPokemon.stats, hp: battle.playerPokemon.stats.maxHp }
     })
+    actions.autoSave()
     actions.endBattle()
   }
 

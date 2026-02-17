@@ -1,0 +1,96 @@
+.pause-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.pause-menu {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  min-width: 350px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideInScale 0.3s ease-out;
+}
+
+.pause-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #4ecdc4;
+  margin: 0 0 2rem 0;
+  text-shadow: 0 2px 8px rgba(78, 205, 196, 0.5);
+}
+
+.pause-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pause-btn {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.pause-btn:hover {
+  transform: translateX(8px);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pause-btn.resume {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.pause-btn.save {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.pause-btn.quit {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.pause-hint {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode, useCallback } from 'react'
+import React, { createContext, useContext, useReducer, ReactNode, useCallback, useState } from 'react'
 import { GameState, SceneType, Pokemon, BattleState } from '@/types/game.types'
 import { gameReducer, INITIAL_GAME_STATE, GameAction } from './gameReducer'
 import { loadGame, saveGame } from '@/utils/storage'
@@ -6,6 +6,7 @@ import { loadGame, saveGame } from '@/utils/storage'
 interface GameContextType {
   state: GameState
   dispatch: React.Dispatch<GameAction>
+  isSaving: boolean
   actions: {
     changeScene: (scene: SceneType) => void
     setPlayerName: (name: string) => void
@@ -18,6 +19,7 @@ interface GameContextType {
     saveGameState: () => void
     loadGameState: () => void
     resetGame: () => void
+    autoSave: () => void
   }
 }
 
@@ -25,6 +27,7 @@ const GameContext = createContext<GameContextType | undefined>(undefined)
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_GAME_STATE)
+  const [isSaving, setIsSaving] = useState(false)
 
   const actions = {
     changeScene: useCallback((scene: SceneType) => {
@@ -67,6 +70,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }, []),
 
     saveGameState: useCallback(() => {
+      setIsSaving(true)
+      saveGame(state)
+      setTimeout(() => setIsSaving(false), 2000)
+    }, [state]),
+
+    autoSave: useCallback(() => {
       saveGame(state)
     }, [state]),
 
@@ -84,7 +93,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <GameContext.Provider value={{ state, dispatch, actions }}>
+    <GameContext.Provider value={{ state, dispatch, actions, isSaving }}>
       {children}
     </GameContext.Provider>
   )

@@ -1,15 +1,23 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import { useGame } from '@/state/GameContext'
 import { useKeyboard } from '@/hooks/useKeyboard'
 import { MAPS } from '@/data/maps'
 import { canMoveTo, checkEncounter } from '@/utils/collision'
 import { generateWildPokemon, createStarterPokemon } from '@/data/pokemon'
+import { Pokemon } from '@/types/game.types'
 import MapRenderer from '@/components/Map/MapRenderer'
+import PauseMenu from '@/components/UI/PauseMenu'
+import PokemonDetailModal from '@/components/UI/PokemonDetailModal'
+import KeyboardGuide from '@/components/UI/KeyboardGuide'
+import SaveIndicator from '@/components/UI/SaveIndicator'
 import './OverworldScreen.css'
 
 const OverworldScreen = () => {
-  const { state, actions, dispatch } = useGame()
+  const { state, actions, dispatch, isSaving } = useGame()
   const currentMap = MAPS.starterTown
+  const [isPaused, setIsPaused] = useState(false)
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null)
+  const [showGuide, setShowGuide] = useState(false)
 
   // Initialize with starter Pokemon if party is empty
   useEffect(() => {
@@ -22,6 +30,21 @@ const OverworldScreen = () => {
 
   // Handle keyboard movement
   const handleKeyPress = useCallback((key: string) => {
+    // ESC for pause menu
+    if (key === 'Escape') {
+      setIsPaused(true)
+      return
+    }
+
+    // H for help
+    if (key === 'h' || key === 'H') {
+      setShowGuide(true)
+      return
+    }
+
+    // Don't allow movement when paused
+    if (isPaused) return
+
     let newX = state.player.x
     let newY = state.player.y
     let direction: 'up' | 'down' | 'left' | 'right' = state.player.direction
@@ -48,18 +71,21 @@ const OverworldScreen = () => {
         direction = 'right'
         break
       default:
-        return
+        retAuto-save before battle
+        actions.autoSave()
+        
+        // Start battle
+        actions.startBattle({
+          playerPokemon: state.party[0],
+          enemyPokemon: wildPokemon,
+          turn: Math.random() > 0.5 ? 'player' : 'enemy',
+          battleLog: [`A wild ${wildPokemon.name} appeared!`],
+          isWildBattle: true,
+          canEscape: true,
+        })
+      }
     }
-
-    // Check if move is valid
-    if (canMoveTo(currentMap, newX, newY)) {
-      // Update player position
-      dispatch({
-        type: 'MOVE_PLAYER',
-        payload: { x: newX, y: newY, direction },
-      })
-
-      // Check for wild encounter
+  }, [state.player, currentMap, state.party, dispatch, actions, isPaused
       if (checkEncounter(currentMap, newX, newY) && state.party.length > 0) {
         const wildPokemon = generateWildPokemon(5 + Math.floor(Math.random() * 3))
         
@@ -75,11 +101,19 @@ const OverworldScreen = () => {
       }
     }
   }, [state.player, currentMap, state.party, dispatch, actions])
+const handleQuitToTitle = () => {
+    actions.autoSave()
+    actions.changeScene('title')
+  }
 
-  useKeyboard(handleKeyPress)
+  const handleSave = () => {
+    actions.saveGameState()
+  }
 
   return (
     <div className="overworld-screen">
+      <SaveIndicator isSaving={isSaving} />
+      
       <div className="overworld-ui">
         <div className="party-display">
           <h4>Party</h4>
@@ -88,7 +122,13 @@ const OverworldScreen = () => {
           ) : (
             <div className="party-list">
               {state.party.map((pokemon) => (
-                <div key={pokemon.id} className="party-pokemon">
+                <div 
+                  key={pokemon.id} 
+                  className="party-pokemon"
+                  onClick={() => setSelectedPokemon(pokemon)}
+                  role="button"
+                  tabIndex={0}
+                >
                   <span className="pokemon-sprite">{pokemon.sprite}</span>
                   <div className="pokemon-info">
                     <span className="pokemon-name">{pokemon.name}</span>
@@ -121,6 +161,31 @@ const OverworldScreen = () => {
           <div className="info-item">
             <span className="label">Badges:</span>
             <span className="value">{state.progress.badges}/8</span>
+          </div>
+          <button className="help-btn" onClick={() => setShowGuide(true)}>
+            ❓ Controls
+          </button>
+        </div>
+      </div>
+
+      <PauseMenu
+        isOpen={isPaused}
+        onClose={() => setIsPaused(false)}
+        onSave={handleSave}
+        onQuitToTitle={handleQuitToTitle}
+      />
+
+      {selectedPokemon && (
+        <PokemonDetailModal
+          pokemon={selectedPokemon}
+          onClose={() => setSelectedPokemon(null)}
+        />
+      )}
+
+      <KeyboardGuide
+        isOpen={showGuide}
+        onClose={() => setShowGuide(false)}
+      / <span className="value">{state.progress.badges}/8</span>
           </div>
         </div>
       </div>
