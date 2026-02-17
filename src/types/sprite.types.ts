@@ -13,6 +13,12 @@ export interface SpriteConfig {
   frameHeight: number  // Height of a single frame or entire sprite
   frameCount: number   // Total number of frames (1 for static sprites)
   
+  // Crop/zoom settings (optional - to focus on character within larger image)
+  cropX?: number       // X offset to start cropping from (default: 0)
+  cropY?: number       // Y offset to start cropping from (default: 0)
+  cropWidth?: number   // Width of crop region (default: frameWidth)
+  cropHeight?: number  // Height of crop region (default: frameHeight)
+  
   // Animation settings (optional - only needed for animated sprites)
   fps?: number // Frames per second (default: 8)
   loop?: boolean // Loop animation (default: true)

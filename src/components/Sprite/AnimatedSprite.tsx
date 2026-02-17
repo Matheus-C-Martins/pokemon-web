@@ -67,9 +67,15 @@ const AnimatedSprite = ({
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
         
+        // Use crop settings if provided, otherwise use full frame
+        const srcX = config.cropX ?? 0
+        const srcY = config.cropY ?? 0
+        const srcWidth = config.cropWidth ?? config.frameWidth
+        const srcHeight = config.cropHeight ?? config.frameHeight
+        
         if (config.maintainAspectRatio) {
           // Calculate aspect-ratio-preserving dimensions
-          const imgAspect = config.frameWidth / config.frameHeight
+          const imgAspect = srcWidth / srcHeight
           const canvasAspect = canvas.width / canvas.height
           
           let drawWidth, drawHeight, offsetX, offsetY
@@ -90,8 +96,8 @@ const AnimatedSprite = ({
           
           ctx.drawImage(
             imageRef.current,
-            0, 0,
-            config.frameWidth, config.frameHeight,
+            srcX, srcY,
+            srcWidth, srcHeight,
             offsetX, offsetY,
             drawWidth, drawHeight
           )
@@ -99,8 +105,8 @@ const AnimatedSprite = ({
           // Stretch to fill canvas
           ctx.drawImage(
             imageRef.current,
-            0, 0,
-            config.frameWidth, config.frameHeight,
+            srcX, srcY,
+            srcWidth, srcHeight,
             0, 0,
             canvas.width, canvas.height
           )
@@ -146,11 +152,17 @@ const AnimatedSprite = ({
       const sx = (actualFrame * config.frameWidth) % imageRef.current.width
       const sy = Math.floor((actualFrame * config.frameWidth) / imageRef.current.width) * config.frameHeight
 
+      // Use crop settings if provided (for animated sprites with crops)
+      const srcX = sx + (config.cropX ?? 0)
+      const srcY = sy + (config.cropY ?? 0)
+      const srcWidth = config.cropWidth ?? config.frameWidth
+      const srcHeight = config.cropHeight ?? config.frameHeight
+
       ctx.imageSmoothingEnabled = false // Pixel art - no smoothing
       
       if (config.maintainAspectRatio) {
         // Calculate aspect-ratio-preserving dimensions
-        const imgAspect = config.frameWidth / config.frameHeight
+        const imgAspect = srcWidth / srcHeight
         const canvasAspect = canvas.width / canvas.height
         
         let drawWidth, drawHeight, offsetX, offsetY
@@ -171,8 +183,8 @@ const AnimatedSprite = ({
         
         ctx.drawImage(
           imageRef.current,
-          sx, sy,
-          config.frameWidth, config.frameHeight,
+          srcX, srcY,
+          srcWidth, srcHeight,
           offsetX, offsetY,
           drawWidth, drawHeight
         )
@@ -180,8 +192,8 @@ const AnimatedSprite = ({
         // Stretch to fill canvas
         ctx.drawImage(
           imageRef.current,
-          sx, sy,
-          config.frameWidth, config.frameHeight,
+          srcX, srcY,
+          srcWidth, srcHeight,
           0, 0,
           canvas.width, canvas.height
         )

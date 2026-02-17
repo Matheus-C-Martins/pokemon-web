@@ -35,6 +35,11 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 768,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 350,
+    cropY: 0,
+    cropWidth: 700,
+    cropHeight: 768,
   } as SpriteConfig,
   
   // Forestorm (Leafeon evolution 1) - Simple static sprite
@@ -44,6 +49,11 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 768,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 350,
+    cropY: 0,
+    cropWidth: 700,
+    cropHeight: 768,
   } as SpriteConfig,
   
   // Terraleaf (Forestorm evolution 2) - Simple static sprite
@@ -53,6 +63,11 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 768,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 350,
+    cropY: 0,
+    cropWidth: 700,
+    cropHeight: 768,
   } as SpriteConfig,
 
   // ========== FIRE STARTER LINE ==========
