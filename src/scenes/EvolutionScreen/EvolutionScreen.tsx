@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Pokemon } from '@/types/game.types'
+import AnimatedSprite from '@/components/Sprite/AnimatedSprite'
 import './EvolutionScreen.css'
 
 interface EvolutionScreenProps {
@@ -51,7 +52,11 @@ const EvolutionScreen = ({ pokemon, onComplete }: EvolutionScreenProps) => {
               {pokemon.name} is evolving!
             </p>
             <div className="pokemon-preview">
-              <span className="pokemon-sprite-large">{pokemon.sprite}</span>
+              <AnimatedSprite 
+                pokemonName={pokemon.name}
+                animation="idle"
+                size="huge"
+              />
             </div>
             <div className="evolution-buttons">
               <button className="evolution-btn evolve" onClick={handleEvolve}>
@@ -67,11 +72,19 @@ const EvolutionScreen = ({ pokemon, onComplete }: EvolutionScreenProps) => {
         {stage === 'evolving' && (
           <div className="evolution-animation">
             <div className={`evolution-sprite ${showNewForm ? 'fade-out' : ''}`}>
-              <span className="pokemon-sprite-huge">{pokemon.sprite}</span>
+              <AnimatedSprite 
+                pokemonName={pokemon.name}
+                animation="evolving"
+                size="huge"
+              />
             </div>
             {showNewForm && (
               <div className="evolution-sprite fade-in">
-                <span className="pokemon-sprite-huge">{pokemon.evolution.sprite}</span>
+                <AnimatedSprite 
+                  pokemonName={pokemon.evolution.evolvesInto}
+                  animation="evolving"
+                  size="huge"
+                />
               </div>
             )}
             <div className="evolution-light"></div>
@@ -85,7 +98,11 @@ const EvolutionScreen = ({ pokemon, onComplete }: EvolutionScreenProps) => {
               {pokemon.name} evolved into {pokemon.evolution.evolvesInto}!
             </p>
             <div className="pokemon-preview">
-              <span className="pokemon-sprite-large">{pokemon.evolution.sprite}</span>
+              <AnimatedSprite 
+                pokemonName={pokemon.evolution.evolvesInto}
+                animation="idle"
+                size="huge"
+              />
             </div>
             <button className="evolution-btn continue" onClick={handleContinue}>
               ▶️ Continue

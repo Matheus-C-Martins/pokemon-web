@@ -10,6 +10,7 @@ import PauseMenu from '@/components/UI/PauseMenu'
 import PokemonDetailModal from '@/components/UI/PokemonDetailModal'
 import KeyboardGuide from '@/components/UI/KeyboardGuide'
 import SaveIndicator from '@/components/UI/SaveIndicator'
+import AnimatedSprite from '@/components/Sprite/AnimatedSprite'
 import './OverworldScreen.css'
 
 const OverworldScreen = () => {
@@ -128,7 +129,11 @@ const OverworldScreen = () => {
                   role="button"
                   tabIndex={0}
                 >
-                  <span className="pokemon-sprite">{pokemon.sprite}</span>
+                  <AnimatedSprite 
+                    pokemonName={pokemon.name}
+                    animation="idle"
+                    size="medium"
+                  />
                   <div className="pokemon-info">
                     <span className="pokemon-name">{pokemon.name}</span>
                     <span className="pokemon-level">Lv.{pokemon.level}</span>

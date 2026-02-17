@@ -1,4 +1,5 @@
 import { Pokemon } from '@/types/game.types'
+import AnimatedSprite from '@/components/Sprite/AnimatedSprite'
 import './PokemonDetailModal.css'
 
 interface PokemonDetailModalProps {
@@ -13,7 +14,11 @@ const PokemonDetailModal = ({ pokemon, onClose }: PokemonDetailModalProps) => {
         <button className="modal-close" onClick={onClose}>✕</button>
         
         <div className="detail-header">
-          <span className="detail-sprite">{pokemon.sprite}</span>
+          <AnimatedSprite 
+            pokemonName={pokemon.name}
+            animation="idle"
+            size="large"
+          />
           <div className="detail-header-info">
             <h2 className="detail-name">{pokemon.name}</h2>
             <div className="detail-types">

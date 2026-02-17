@@ -1,0 +1,39 @@
+.sprite-canvas,
+.sprite-emoji {
+  display: inline-block;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Size variants */
+.sprite-small {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+}
+
+.sprite-medium {
+  width: 64px;
+  height: 64px;
+  font-size: 64px;
+}
+
+.sprite-large {
+  width: 96px;
+  height: 96px;
+  font-size: 96px;
+}
+
+.sprite-huge {
+  width: 128px;
+  height: 128px;
+  font-size: 128px;
+}
+
+/* Emoji sprites */
+.sprite-emoji {
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+}
