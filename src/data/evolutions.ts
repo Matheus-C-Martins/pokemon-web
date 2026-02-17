@@ -1,4 +1,4 @@
-import { Evolution, PokemonType } from '@/types/game.types'
+import { Evolution } from '@/types/game.types'
 
 // Evolution chains for all Pokemon
 export const EVOLUTIONS: Record<string, Evolution> = {
