@@ -79,11 +79,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Blazeclaw (Embear evolution 1) - Simple static sprite
@@ -93,11 +88,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Infernotitan (Blazeclaw evolution 2) - Simple static sprite
@@ -107,11 +97,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
 
   // ========== WATER STARTER LINE ==========
@@ -123,11 +108,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Torrentseal (Aquarius evolution 1) - Simple static sprite
@@ -137,11 +117,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Hydroknight (Torrentseal evolution 2) - Simple static sprite
@@ -151,11 +126,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in MORE on character (smaller crop = more zoom)
-    cropX: 250,
-    cropY: 150,
-    cropWidth: 500,
-    cropHeight: 650,
   } as SpriteConfig,
 
   // ========== WILD POKEMON ==========
@@ -195,11 +165,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (1024x1024 source)
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
 
   // ========== WILD POKEMON WITH EVOLUTIONS ==========
@@ -225,11 +190,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (1024x1024 source)
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Rockbite (Wild Rock/Ground type) - Simple static sprite
@@ -253,11 +213,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (1024x1024 source)
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Fluttermoth (Wild Bug/Flying type) - Simple static sprite
@@ -267,11 +222,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (1024x1024 source)
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
   
   // Celestialwing (Fluttermoth evolution) - Simple static sprite
@@ -281,11 +231,6 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
     frameHeight: 1024,
     frameCount: 1, // Single static sprite
     maintainAspectRatio: true, // Prevent stretching
-    // Crop to zoom in on character (1024x1024 source)
-    cropX: 200,
-    cropY: 100,
-    cropWidth: 650,
-    cropHeight: 850,
   } as SpriteConfig,
 }
 
