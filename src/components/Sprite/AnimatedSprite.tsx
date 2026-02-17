@@ -30,6 +30,13 @@ const AnimatedSprite = ({
   const isAnimated = isSpriteConfig(sprite)
   const isStatic = isAnimated && sprite.frameCount === 1
 
+  // Reset sprite image when Pokemon changes
+  useEffect(() => {
+    imageRef.current = null
+    setCurrentFrame(0)
+    setImageError(false)
+  }, [pokemonName])
+
   useEffect(() => {
     if (!isAnimated || !canvasRef.current) return
 

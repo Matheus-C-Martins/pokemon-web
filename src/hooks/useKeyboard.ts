@@ -30,8 +30,8 @@ export function useKeyboard(onKeyPress: (key: string) => void) {
         onKeyPress(key)
       }
     } 
-    // Other keys (ESC, H, etc.) without cooldown
-    else if (['Escape', 'h', 'H'].includes(key)) {
+    // Other keys (ESC, H, P, etc.) without cooldown
+    else if (['Escape', 'h', 'H', 'p', 'P'].includes(key)) {
       if (!keysPressed.current[key]) {
         keysPressed.current[key] = true
         onKeyPress(key)
