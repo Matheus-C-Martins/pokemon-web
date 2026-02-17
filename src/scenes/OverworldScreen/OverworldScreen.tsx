@@ -30,9 +30,9 @@ const OverworldScreen = () => {
 
   // Handle keyboard movement
   const handleKeyPress = useCallback((key: string) => {
-    // ESC for pause menu
+    // ESC for pause menu (toggle)
     if (key === 'Escape') {
-      setIsPaused(true)
+      setIsPaused(prev => !prev)
       return
     }
 

@@ -1,4 +1,3 @@
-import { useEffect, useCallback } from 'react'
 import './PauseMenu.css'
 
 interface PauseMenuProps {
@@ -9,17 +8,6 @@ interface PauseMenuProps {
 }
 
 const PauseMenu = ({ isOpen, onClose, onSave, onQuitToTitle }: PauseMenuProps) => {
-  const handleKeyPress = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape' && isOpen) {
-      onClose()
-    }
-  }, [isOpen, onClose])
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress)
-    return () => document.removeEventListener('keydown', handleKeyPress)
-  }, [handleKeyPress])
-
   if (!isOpen) return null
 
   return (

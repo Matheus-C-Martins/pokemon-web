@@ -13,8 +13,10 @@ export function useKeyboard(onKeyPress: (key: string) => void) {
     const key = event.key
     const now = Date.now()
 
-    // Arrow keys for movement
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(key)) {
+    // Movement keys with cooldown
+    const movementKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd']
+    
+    if (movementKeys.includes(key)) {
       event.preventDefault()
       
       // Cooldown to prevent too rapid movement
@@ -25,6 +27,13 @@ export function useKeyboard(onKeyPress: (key: string) => void) {
       if (!keysPressed.current[key]) {
         keysPressed.current[key] = true
         lastPressTime.current = now
+        onKeyPress(key)
+      }
+    } 
+    // Other keys (ESC, H, etc.) without cooldown
+    else if (['Escape', 'h', 'H'].includes(key)) {
+      if (!keysPressed.current[key]) {
+        keysPressed.current[key] = true
         onKeyPress(key)
       }
     }
