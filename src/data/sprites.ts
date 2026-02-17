@@ -49,40 +49,239 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
       fainted: { startFrame: 7, frameCount: 1 }, // Bottom row: frame 7 (defeated)
     }
   } as SpriteConfig,
+
+  // ========== FIRE STARTER LINE ==========
   
-  // Embear (Fire Starter)
-  'embear': '🔥',
+  // Embear (Fire Starter) - Needs sprite!
+  'embear': {
+    url: '/pokemon-web/sprites/embear.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  // Blazeclaw (Embear evolution 1)
-  'blazeclaw': '🔥',
+  // Blazeclaw (Embear evolution 1) - Needs sprite!
+  'blazeclaw': {
+    url: '/pokemon-web/sprites/blazeclaw.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  // Infernotitan (Embear evolution 2)
-  'infernotitan': '🌋',
+  // Infernotitan (Blazeclaw evolution 2) - Needs sprite!
+  'infernotitan': {
+    url: '/pokemon-web/sprites/infernotitan.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+
+  // ========== WATER STARTER LINE ==========
   
-  // Aquarius (Water Starter)
-  'aquarius': '💧',
+  // Aquarius (Water Starter) - Needs sprite!
+  'aquarius': {
+    url: '/pokemon-web/sprites/aquarius.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  // Torrentseal (Aquarius evolution 1)
-  'torrentseal': '🌊',
+  // Torrentseal (Aquarius evolution 1) - Needs sprite!
+  'torrentseal': {
+    url: '/pokemon-web/sprites/torrentseal.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  // Hydroknight (Aquarius evolution 2)
-  'hydroknight': '💎',
+  // Hydroknight (Torrentseal evolution 2) - Needs sprite!
+  'hydroknight': {
+    url: '/pokemon-web/sprites/hydroknight.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+
+  // ========== WILD POKEMON ==========
   
-  // ===== WILD POKEMON =====
+  // Grassling (Wild Grass type) - Needs sprite!
+  'grassling': {
+    url: '/pokemon-web/sprites/grassling.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  'sparkrat': '⚡',
-  'voltrodent': '⚡',
+  // Flamepup (Wild Fire type) - Needs sprite!
+  'flamepup': {
+    url: '/pokemon-web/sprites/flamepup.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  'rockbite': '🪨',
-  'boulderjaw': '🗿',
+  // Aquakid (Wild Water type) - Needs sprite!
+  'aquakid': {
+    url: '/pokemon-web/sprites/aquakid.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+
+  // ========== WILD POKEMON WITH EVOLUTIONS ==========
   
-  'fluttermoth': '🦋',
-  'celestialwing': '🦋',
+  // Sparkrat (Wild Electric type) - Needs sprite!
+  'sparkrat': {
+    url: '/pokemon-web/sprites/sparkrat.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
   
-  // Generic wild Pokemon (from generateWildPokemon)
-  'grassling': '🌱',
-  'flamepup': '🔥',
-  'aquakid': '💧',
+  // Voltrodent (Sparkrat evolution) - Needs sprite!
+  'voltrodent': {
+    url: '/pokemon-web/sprites/voltrodent.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+  
+  // Rockbite (Wild Rock/Ground type) - Needs sprite!
+  'rockbite': {
+    url: '/pokemon-web/sprites/rockbite.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+  
+  // Boulderjaw (Rockbite evolution) - Needs sprite!
+  'boulderjaw': {
+    url: '/pokemon-web/sprites/boulderjaw.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+  
+  // Fluttermoth (Wild Bug/Flying type) - Needs sprite!
+  'fluttermoth': {
+    url: '/pokemon-web/sprites/fluttermoth.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      evolving: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
+  
+  // Celestialwing (Fluttermoth evolution) - Needs sprite!
+  'celestialwing': {
+    url: '/pokemon-web/sprites/celestialwing.png',
+    frameWidth: 64,
+    frameHeight: 64,
+    frameCount: 8,
+    fps: 8,
+    loop: true,
+    animations: {
+      idle: { startFrame: 0, frameCount: 4 },
+      battle: { startFrame: 4, frameCount: 3 },
+      fainted: { startFrame: 7, frameCount: 1 },
+    }
+  } as SpriteConfig,
 }
 
 // Helper function to get sprite by Pokemon name
