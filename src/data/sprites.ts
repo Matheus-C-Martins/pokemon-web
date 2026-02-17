@@ -160,49 +160,46 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
 
   // ========== WILD POKEMON ==========
   
-  // Grassling (Wild Grass type) - Needs sprite!
+  // Grassling (Wild Grass type) - Simple static sprite
   'grassling': {
     url: '/sprites/grassling.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      fainted: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 2048,
+    frameHeight: 2048,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character (2048x2048 source)
+    cropX: 400,
+    cropY: 200,
+    cropWidth: 1300,
+    cropHeight: 1700,
   } as SpriteConfig,
   
-  // Flamepup (Wild Fire type) - Needs sprite!
+  // Flamepup (Wild Fire type) - Simple static sprite
   'flamepup': {
     url: '/sprites/flamepup.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      fainted: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 2048,
+    frameHeight: 2048,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character (2048x2048 source)
+    cropX: 400,
+    cropY: 200,
+    cropWidth: 1300,
+    cropHeight: 1700,
   } as SpriteConfig,
   
-  // Aquakid (Wild Water type) - Needs sprite!
+  // Aquakid (Wild Water type) - Simple static sprite
   'aquakid': {
     url: '/sprites/aquakid.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      fainted: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character (1024x1024 source)
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
 
   // ========== WILD POKEMON WITH EVOLUTIONS ==========
