@@ -1,0 +1,38 @@
+.battle-log {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  min-height: 120px;
+  backdrop-filter: blur(10px);
+}
+
+.battle-log-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.log-message {
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+  animation: messageSlide 0.3s ease-out;
+  padding: 0.25rem 0;
+}
+
+.log-message:last-child {
+  font-weight: 600;
+  color: #4ecdc4;
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
