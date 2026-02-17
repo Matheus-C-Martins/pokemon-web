@@ -72,49 +72,46 @@ export const POKEMON_SPRITES: Record<string, PokemonSprite> = {
 
   // ========== FIRE STARTER LINE ==========
   
-  // Embear (Fire Starter) - Needs sprite!
+  // Embear (Fire Starter) - Simple static sprite
   'embear': {
     url: '/sprites/embear.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      evolving: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
   
-  // Blazeclaw (Embear evolution 1) - Needs sprite!
+  // Blazeclaw (Embear evolution 1) - Simple static sprite
   'blazeclaw': {
     url: '/sprites/blazeclaw.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      evolving: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
   
-  // Infernotitan (Blazeclaw evolution 2) - Needs sprite!
+  // Infernotitan (Blazeclaw evolution 2) - Simple static sprite
   'infernotitan': {
     url: '/sprites/infernotitan.png',
-    frameWidth: 64,
-    frameHeight: 64,
-    frameCount: 8,
-    fps: 8,
-    loop: true,
-    animations: {
-      idle: { startFrame: 0, frameCount: 4 },
-      battle: { startFrame: 4, frameCount: 3 },
-      fainted: { startFrame: 7, frameCount: 1 },
-    }
+    frameWidth: 1024,
+    frameHeight: 1024,
+    frameCount: 1, // Single static sprite
+    maintainAspectRatio: true, // Prevent stretching
+    // Crop to zoom in on character
+    cropX: 200,
+    cropY: 100,
+    cropWidth: 650,
+    cropHeight: 850,
   } as SpriteConfig,
 
   // ========== WATER STARTER LINE ==========
