@@ -3,6 +3,7 @@ import './BattleActions.css'
 
 interface BattleActionsProps {
   onFight: () => void
+  onPokemon: () => void
   onBag: () => void
   onRun: () => void
   canRun: boolean
@@ -22,11 +23,14 @@ interface BagMenuProps {
   hasItems: boolean
 }
 
-export const BattleActions = ({ onFight, onBag, onRun, canRun, disabled }: BattleActionsProps) => {
+export const BattleActions = ({ onFight, onPokemon, onBag, onRun, canRun, disabled }: BattleActionsProps) => {
   return (
     <div className="battle-actions">
       <button className="action-btn fight" onClick={onFight} disabled={disabled}>
         ⚔️ Fight
+      </button>
+      <button className="action-btn pokemon" onClick={onPokemon} disabled={disabled}>
+        👾 Pokemon
       </button>
       <button className="action-btn bag" onClick={onBag} disabled={disabled}>
         🎒 Bag
@@ -83,3 +87,5 @@ export const BagMenu = ({ onUsePokeball, onUsePotion, onBack, hasItems }: BagMen
     </div>
   )
 }
+
+export { PokemonSwitchMenu } from './PokemonSwitchMenu'

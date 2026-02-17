@@ -6,12 +6,13 @@ import { getEffectivenessMessage } from '@/utils/typeEffectiveness'
 import { checkEvolution, evolvePokemon } from '@/utils/evolution'
 import PokemonDisplay from '@/components/Battle/PokemonDisplay'
 import BattleLog from '@/components/Battle/BattleLog'
-import { BattleActions, MoveSelection, BagMenu } from '@/components/Battle/BattleActions'
+import { BattleActions, MoveSelection, BagMenu, PokemonSwitchMenu } from '@/components/Battle/BattleActions'
 import EvolutionScreen from '@/scenes/EvolutionScreen/EvolutionScreen'
 import LevelUpModal from '@/components/UI/LevelUpModal'
+import CatchSuccessModal from '@/components/UI/CatchSuccessModal'
 import './BattleScreen.css'
 
-type BattleMenu = 'main' | 'moves' | 'bag'
+type BattleMenu = 'main' | 'moves' | 'bag' | 'pokemon'
 
 const BattleScreen = () => {
   const { state, actions, dispatch } = useGame()
@@ -20,6 +21,7 @@ const BattleScreen = () => {
   const [battleLog, setBattleLog] = useState<string[]>([])
   const [evolvingPokemon, setEvolvingPokemon] = useState<Pokemon | null>(null)
   const [levelUpData, setLevelUpData] = useState<(LevelUpResult & { oldLevel: number }) | null>(null)
+  const [caughtPokemon, setCaughtPokemon] = useState<Pokemon | null>(null)
 
   const battle = state.battle
 
@@ -164,23 +166,31 @@ const BattleScreen = () => {
       addLog(`Gotcha! ${battle.enemyPokemon.name} was caught!`)
       
       // Add to party/box
-      const caughtPokemon = {
+      const caughtPokemonData = {
         ...battle.enemyPokemon,
         isWild: false,
         stats: { ...battle.enemyPokemon.stats, hp: battle.enemyPokemon.stats.maxHp }
       }
       
-      actions.addPokemon(caughtPokemon)
+      actions.addPokemon(caughtPokemonData)
       
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      actions.autoSave()
-      actions.endBattle()
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Show catch success modal
+      setCaughtPokemon(caughtPokemonData)
+      setIsProcessing(false)
     } else {
       addLog('Oh no! The Pokemon broke free!')
       await new Promise(resolve => setTimeout(resolve, 1000))
       await enemyTurn()
       setIsProcessing(false)
     }
+  }
+
+  const handleCatchModalClose = () => {
+    setCaughtPokemon(null)
+    actions.autoSave()
+    actions.endBattle()
   }
 
   const handleUsePotion = async () => {
@@ -207,6 +217,30 @@ const BattleScreen = () => {
       await new Promise(resolve => setTimeout(resolve, 1000))
     }
 
+    setIsProcessing(false)
+  }
+
+  const handleSwitchPokemon = async (newPokemon: Pokemon) => {
+    if (isProcessing || newPokemon.id === battle.playerPokemon.id) return
+    setIsProcessing(true)
+    setCurrentMenu('main')
+
+    addLog(`Come back, ${battle.playerPokemon.name}!`)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    // Switch to new Pokemon
+    dispatch({
+      type: 'UPDATE_BATTLE',
+      payload: {
+        playerPokemon: newPokemon
+      }
+    })
+
+    addLog(`Go, ${newPokemon.name}!`)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    // Enemy gets a free turn after switching
+    await enemyTurn()
     setIsProcessing(false)
   }
 
@@ -320,6 +354,7 @@ const BattleScreen = () => {
             {currentMenu === 'main' && (
               <BattleActions
                 onFight={() => setCurrentMenu('moves')}
+                onPokemon={() => setCurrentMenu('pokemon')}
                 onBag={() => setCurrentMenu('bag')}
                 onRun={handleRun}
                 canRun={battle.canEscape}
@@ -331,6 +366,15 @@ const BattleScreen = () => {
               <MoveSelection
                 moves={battle.playerPokemon.moves}
                 onSelectMove={handlePlayerAttack}
+                onBack={() => setCurrentMenu('main')}
+              />
+            )}
+
+            {currentMenu === 'pokemon' && (
+              <PokemonSwitchMenu
+                party={state.party}
+                currentPokemonId={battle.playerPokemon.id}
+                onSelectPokemon={handleSwitchPokemon}
                 onBack={() => setCurrentMenu('main')}
               />
             )}
@@ -360,6 +404,13 @@ const BattleScreen = () => {
           oldLevel={levelUpData.oldLevel}
           statChanges={levelUpData.statChanges}
           onClose={handleLevelUpClose}
+        />
+      )}
+
+      {caughtPokemon && (
+        <CatchSuccessModal
+          pokemon={caughtPokemon}
+          onClose={handleCatchModalClose}
         />
       )}
     </div>

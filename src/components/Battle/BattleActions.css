@@ -1,6 +1,6 @@
 .battle-actions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   animation: fadeInUp 0.3s ease-out;
 }
@@ -35,6 +35,10 @@
 
 .action-btn.fight {
   background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.action-btn.pokemon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
 }
 
 .action-btn.bag {
